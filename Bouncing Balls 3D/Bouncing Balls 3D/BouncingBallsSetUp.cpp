@@ -4,8 +4,10 @@
 
 #include "glut.h"
 
-BouncingBallsSetUp::BouncingBallsSetUp()
+BouncingBallsSetUp::BouncingBallsSetUp(int nWidthIn, int nHeightIn)
 {
+	this->SetHeight(nHeightIn);
+	this->SetWidth(nWidthIn);
 }
 
 // Outputs a string of text at the specified location.
@@ -51,9 +53,22 @@ Screen *BouncingBallsSetUp::KeyBoard(
 }
 
 void BouncingBallsSetUp::Reshape(
-    int nWidth,
-    int nHeight)
+    int nWidthIn,
+    int nHeightIn)
 {
+	this->SetWidth(nWidthIn);
+	this->SetHeight(nHeightIn);
+
+	// Set the pixel resolution of the final picture (Screen coordinates).
+	glViewport(0, 0, nWidthIn, nHeightIn);
+
+	// Set the projection mode to 2D orthographic, and set the world coordinates:
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	// We will maintain the idea of a 700 by 500 screen.
+	gluOrtho2D(0, 700, 0, 500);
+	glMatrixMode(GL_MODELVIEW);
 }
 
 Screen *BouncingBallsSetUp::Mouse(
@@ -65,7 +80,9 @@ Screen *BouncingBallsSetUp::Mouse(
 	if(nMouseButton==GLUT_LEFT_BUTTON && nState==GLUT_UP) 
 	{
 	Screen *pScreen;
-	pScreen=new BouncingBalls;
+	int nWidth=this->GetWidth();
+	int nHeight=this->GetHeight();
+	pScreen=new BouncingBalls(nWidth,nHeight);
 	return pScreen;
 	}
 	return NULL;

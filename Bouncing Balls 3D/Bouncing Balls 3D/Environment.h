@@ -6,7 +6,7 @@ class Environment
 {
 public:
     // Constructor
-    Environment();
+    Environment(int nWidth, int nHeight);
 
     ////////////////////////////////////////////
     //
@@ -35,7 +35,8 @@ public:
 
 private:
 	Screen     *pScreen;
-    double      dScreen_x, dScreen_y;
+	// The current screen dimensions.
+    int         nWidth, nHeight;
 
 protected:
 };

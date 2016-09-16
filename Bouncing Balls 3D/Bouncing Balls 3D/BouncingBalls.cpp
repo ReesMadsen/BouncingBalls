@@ -12,9 +12,11 @@
   #endif
 #endif
 
-BouncingBalls::BouncingBalls()
+BouncingBalls::BouncingBalls(int nWidthIn, int nHeightIn)
 {
-	pEnviroment=new BouncingBallsEnvironment;
+	this->SetHeight(nHeightIn);
+	this->SetWidth(nWidthIn);
+	pEnviroment=new BouncingBallsEnvironment(nWidthIn,nHeightIn);
 }
 
 ////////////////////////////////////////////
@@ -39,9 +41,20 @@ Screen *BouncingBalls::KeyBoard(
 }
 
 void BouncingBalls::Reshape(
-    int nWidth,
-    int nHeight)
+    int nWidthIn,
+    int nHeightIn)
 {
+	this->SetWidth(nWidthIn);
+	this->SetHeight(nHeightIn);
+	this->pEnviroment->Reshape(nWidthIn,nHeightIn);
+
+	// Set the pixel resolution of the final picture (Screen coordinates).
+	glViewport(0, 0, nWidthIn, nHeightIn);
+	// Set the projection mode to 2D orthographic, and set the world coordinates:
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(0, nWidthIn, 0, nHeightIn);
+	glMatrixMode(GL_MODELVIEW);
 }
 
 Screen *BouncingBalls::Mouse(

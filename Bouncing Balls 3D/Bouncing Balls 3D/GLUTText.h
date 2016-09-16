@@ -1,0 +1,1 @@
+void DrawText(double x, double y, char *string);

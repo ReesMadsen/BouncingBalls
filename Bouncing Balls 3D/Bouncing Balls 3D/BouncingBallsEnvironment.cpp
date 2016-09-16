@@ -11,9 +11,11 @@
   #endif
 #endif
 
-BouncingBallsEnvironment::BouncingBallsEnvironment()
-	: dSizeX(700),
-	  dSizeY(500),
+BouncingBallsEnvironment::BouncingBallsEnvironment(int nWidthIn, int nHeightIn)
+	: nWidth(nWidthIn), 
+	  nHeight(nHeightIn),
+	  dSizeX((double)nWidthIn),
+	  dSizeY((double)nHeightIn),
 	  dSizeZ(700),
 	  dViewDistance(1000),
 	  nCircles(6),
@@ -430,6 +432,46 @@ void BouncingBallsEnvironment::Display()
 	glutPostRedisplay();
 }
 
+void BouncingBallsEnvironment::Reshape(int nWidthIn,
+									   int nHeightIn)
+{
+	this->nWidth=nWidthIn;
+	this->nHeight=nHeightIn;
+	
+	if(nWidth>nMaxRadius*2 && nHeight>nMaxRadius*2)
+	{
+		dMax_dx*=(nWidth/dSizeX);
+		dMax_dy*=(nHeight/dSizeY);
+		dGravity_x*=(nWidth/dSizeX);
+		dGravity_y*=(nHeight/dSizeY);
+		int i;
+		for(i=0; i < nCircles; i++)
+		{
+			aSpheres[i]->Set_dx(aSpheres[i]->Get_dx()*nWidth/dSizeX*nWidth/dSizeX);
+			aSpheres[i]->Set_dy(aSpheres[i]->Get_dy()*nHeight/dSizeY*nHeight/dSizeY);
+			aSpheres[i]->SetSolid(false);
+			aSpheres[i]->SetCenterX(aSpheres[i]->GetCenterX()*nWidth/dSizeX);
+			aSpheres[i]->SetCenterY(aSpheres[i]->GetCenterY()*nHeight/dSizeY);
+			if(aSpheres[i]->GetCenterX()+aSpheres[i]->GetRadius()>nWidth || aSpheres[i]->GetCenterX()-aSpheres[i]->GetRadius() < 0 
+				|| aSpheres[i]->GetCenterY()+aSpheres[i]->GetRadius()>nHeight || aSpheres[i]->GetCenterY()-aSpheres[i]->GetRadius() < 0)
+			{
+				//respawn(i,nWidth,nHeight);
+			}
+		}
+		// Reset our global variables to the new width and height.
+		dSizeX = nWidth;
+		dSizeY = nHeight;
+
+		// Set the pixel resolution of the final picture (Screen coordinates).
+		//glViewport(0, 0, nWidth, nHeight);
+
+		// Set the projection mode to 2D orthographic, and set the world coordinates:
+		//glMatrixMode(GL_PROJECTION);
+		//glLoadIdentity();
+		//gluOrtho2D(0, nWidth, 0, nHeight);
+		//glMatrixMode(GL_MODELVIEW);
+	}
+}
 void BouncingBallsEnvironment::Mouse(int nMouseButton,
 									 int nState,
 									 int nXVal,

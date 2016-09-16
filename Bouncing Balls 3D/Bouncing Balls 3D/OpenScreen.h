@@ -5,7 +5,7 @@
 class OpenScreen : public Screen
 {
 public:
-    OpenScreen();
+    OpenScreen(int nWidth, int nHeight);
 
     ////////////////////////////////////////////
     //

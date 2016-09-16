@@ -5,7 +5,7 @@
 class BouncingBallsSetUp : public Screen
 {
 public:
-    BouncingBallsSetUp();
+    BouncingBallsSetUp(int nWidth, int nHeight);
 
     ////////////////////////////////////////////
     //

@@ -2,11 +2,14 @@
 #include "OpenScreen.h"
 #include "Error.h"
 
+#include "glut.h"
+
 // Constructor
-Environment::Environment()
+Environment::Environment(int nWidthIn, int nHeightIn)
+	: nWidth(nWidthIn), nHeight(nHeightIn)
 {
     // The first initilazation will be of the openscreen.
-    pScreen=new OpenScreen;
+    pScreen=new OpenScreen(nWidthIn,nHeightIn);
 }
 
 ////////////////////////////////////////////
@@ -43,14 +46,16 @@ void Environment::KeyBoard(
 }
 
 void Environment::Reshape(
-    int nWidth,
-    int nHeight)
+    int nWidthIn,
+    int nHeightIn)
 {
+	this->nWidth =nWidthIn;
+	this->nHeight=nHeightIn;
     if(this->pScreen)
     {
-        pScreen->Reshape(nWidth,nHeight);
-		pScreen->SetHeight(nHeight);
-		pScreen->SetWidth(nWidth);
+        pScreen->Reshape(nWidthIn,nHeightIn);
+		pScreen->SetHeight(nHeightIn);
+		pScreen->SetWidth(nWidthIn);
     }
     else
     {

@@ -13,7 +13,7 @@
 // will be handled through a single instance of a
 // class called Universe.
 
-Environment TheEnvironment;
+Environment TheEnvironment(700,500);
 
 // This callback function gets called by the Glut
 // system whenever it decides things need to be redrawn.
@@ -73,13 +73,6 @@ void reshape(int nWidth,
 	{
 		PrintError(NullError);
 	}
-	glViewport(0,0,700,500);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(0, 700, 0, 500);
-	glMatrixMode(GL_MODELVIEW);
-
-	glutPostRedisplay();
 }
 
 // This callback function gets called by the Glut

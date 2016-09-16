@@ -39,13 +39,15 @@ public:
 
 	virtual ScreenType GetScreenType()=0;
 	
-	void SetHeight(int nHeightIn) {nHeight=nHeightIn;}
-	void SetWidth(int nWidthIn) {nWidth=nWidth;}
+	virtual void SetHeight(int nHeightIn) {nHeight=nHeightIn;}
+	virtual void SetWidth(int nWidthIn) {nWidth=nWidthIn;}
 
-	int GetHeight() {return this->nHeight;}
-	int GetWidth() {return this->nWidth;}
+	virtual int GetHeight() {return this->nHeight;}
+	virtual int GetWidth() {return this->nWidth;}
 
 private:
+	// nHeight and nWidth need to be initalized
+	// in every instance of a screen.
 	int nHeight;
 	int nWidth;
 };

@@ -6,7 +6,7 @@
 class BouncingBalls : public Screen
 {
 public:
-    BouncingBalls();
+    BouncingBalls(int nWidth, int nHeight);
 
     ////////////////////////////////////////////
     //

@@ -15,7 +15,7 @@ const double dWallFriction=.9502;
 class BouncingBallsEnvironment
 {
 public:
-    BouncingBallsEnvironment();
+    BouncingBallsEnvironment(int nWidth, int nHeight);
 	~BouncingBallsEnvironment();
 
 	void DrawBouncingBalls();
@@ -30,12 +30,17 @@ public:
 	void HandleGravity();
 
 	void Display();
+	void Reshape(int nWidthIn,
+				 int nHeightIn);
 	void Mouse(int nMouseButton,
 			   int nState,
 			   int nXVal,
 			   int nYVal);
 
 private:
+	// Size of the screen.
+	int nWidth;
+	int nHeight;
 	// The dimensions of the box.
 	double dSizeX;
 	double dSizeY;
