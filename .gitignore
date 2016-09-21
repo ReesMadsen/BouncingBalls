@@ -1,0 +1,21 @@
+*.suo
+Bouncing Balls 3D/Bouncing Balls 3D/Bouncing Balls 3D.opensdf
+*.sdf
+Bouncing Balls 3D/Bouncing Balls 3D/Bouncing Balls 3D.sln
+*.log
+Bouncing Balls 3D/Bouncing Balls 3D/Debug/cl.command.1.tlog
+*.tlog
+*.obj
+*.dll
+Bouncing Balls 3D/Bouncing Balls 3D/glut32.lib
+*.cache
+*.lastbuildstate
+Bouncing Balls 3D/Bouncing Balls 3D/Debug/GLUT Projects.exe
+*.manifest
+*.res
+Bouncing Balls 3D/Bouncing Balls 3D/Debug/vc100.pdb
+*.idb
+*.ipch
+*.rc
+*.pdb
+*.ilk
