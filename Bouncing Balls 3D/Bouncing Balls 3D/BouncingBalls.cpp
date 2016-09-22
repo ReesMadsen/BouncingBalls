@@ -1,4 +1,5 @@
 #include "BouncingBalls.h"
+#include "BouncingBallsSetUp.h"
 
 #include <iostream>
 
@@ -19,6 +20,15 @@ BouncingBalls::BouncingBalls(int nWidthIn, int nHeightIn)
 	pEnviroment=new BouncingBallsEnvironment(nWidthIn,nHeightIn);
 }
 
+BouncingBalls::~BouncingBalls()
+{
+	if(this->pEnviroment)
+	{
+		delete this->pEnviroment;
+		this->pEnviroment=NULL;
+	}
+}
+
 ////////////////////////////////////////////
 //
 // Glut functions
@@ -37,7 +47,27 @@ Screen *BouncingBalls::KeyBoard(
     int           nXVal,
     int           nYVal)
 {
-	return NULL;
+	Screen *pScreen=NULL;
+	switch(ucKey)
+	{
+		case 'b': // Back to the open screen.
+			{
+				int nHeight=this->GetHeight();
+				int nWidth=this->GetWidth();
+				pScreen=new BouncingBallsSetUp(nWidth,nHeight);
+
+				break;
+			}
+		case 'r': // Restart bouncing balls.
+			{
+				int nHeight=this->GetHeight();
+				int nWidth=this->GetWidth();
+				pScreen=new BouncingBalls(nWidth,nHeight);
+
+				break;
+			}
+	}
+	return pScreen;
 }
 
 void BouncingBalls::Reshape(

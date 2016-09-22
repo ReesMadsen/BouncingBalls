@@ -40,6 +40,12 @@ void keyboard(unsigned char ucKey,
               int           nXVal,
               int           nYVal)
 {
+	if(ucKey==27) 
+	{
+		// 27 is the escape key.
+		exit(0);
+	}
+
     try
     {
 		TheEnvironment.KeyBoard(ucKey, nXVal, nYVal);

@@ -7,6 +7,8 @@ class Environment
 public:
     // Constructor
     Environment(int nWidth, int nHeight);
+	// Destructor
+	~Environment();
 
     ////////////////////////////////////////////
     //

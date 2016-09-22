@@ -9,21 +9,7 @@
     #include <GL/glut.h>
   #endif
 #endif
-//constructors, destructors
-BouncingBallSphere::BouncingBallSphere()
-	: dCenterX(0), 
-	  dCenterY(0), 
-	  dCenterZ(0), 
-	  dRadius(0), 
-	  d_dx(0),
-	  d_dy(0),
-	  d_dz(0), 
-	  r(0), 
-	  g(0), 
-	  b(0),
-	  bSolid(false)
-{
-}
+// Constructors.
 BouncingBallSphere::BouncingBallSphere(
 	const double x_in, 
 	const double y_in, 
@@ -48,13 +34,14 @@ BouncingBallSphere::BouncingBallSphere(
 	  bSolid(false)
 {
 }
+
 //operator overloading
 bool BouncingBallSphere::operator>(const BouncingBallSphere &rhs)
 {
 	// For complete accuracy this
-	// should test to see which 
-	// ball has a center that is 
-	// closer to the eyes position, 
+	// should test to see which
+	// ball has a center that is
+	// closer to the eyes position,
 	// but this works well enough.
 	return this->dCenterZ > rhs.GetCenterZ();
 }

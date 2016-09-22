@@ -1,5 +1,7 @@
 #include "BouncingBallsSetUp.h"
 #include "BouncingBalls.h"
+#include "GLUTText.h"
+#include "OpenScreen.h"
 #include <iostream>
 
 #include "glut.h"
@@ -10,23 +12,10 @@ BouncingBallsSetUp::BouncingBallsSetUp(int nWidthIn, int nHeightIn)
 	this->SetWidth(nWidthIn);
 }
 
-// Outputs a string of text at the specified location.
-static void DrawText(double x, double y, char *string)
+// Destructor.
+BouncingBallsSetUp::~BouncingBallsSetUp()
 {
-	void *font = GLUT_BITMAP_9_BY_15;
-
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_BLEND);
-	
-	int len, i;
-	glRasterPos2d(x, y);
-	len = (int) strlen(string);
-	for (i = 0; i < len; i++) 
-	{
-		glutBitmapCharacter(font, string[i]);
-	}
-
-    glDisable(GL_BLEND);
+	// As of now there is nothing to do here.
 }
 
 ////////////////////////////////////////////
@@ -39,8 +28,11 @@ void BouncingBallsSetUp::Display()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3d(0,0,0);
-	DrawText(290,390,"Bouncing Balls");
-	DrawText(280,300,"Click to continue");
+	DrawText(10,480,"Bouncing Balls");
+	DrawText(10,460,"Press 'b' to go back.");
+	DrawText(10,440,"Press 'r' to restart.");
+	DrawText(10,420,"Press 'Enter' or left click to continue");
+
 	glutSwapBuffers();
 }
 
@@ -49,7 +41,27 @@ Screen *BouncingBallsSetUp::KeyBoard(
     int           nXVal,
     int           nYVal)
 {
-	return NULL;
+	Screen *pScreen=NULL;
+	switch(ucKey)
+	{
+		case 'b': // Back to the open screen.
+			{
+			int nHeight=this->GetHeight();
+			int nWidth=this->GetWidth();
+			pScreen=new OpenScreen(nWidth,nHeight);
+
+			break;
+			}
+		case 13: // Enter open an instance of bouncing balls.
+			{
+			int nWidth=this->GetWidth();
+			int nHeight=this->GetHeight();
+			pScreen=new BouncingBalls(nWidth,nHeight);
+
+			break;
+			}
+	}
+	return pScreen;
 }
 
 void BouncingBallsSetUp::Reshape(
