@@ -11,6 +11,12 @@ OpenScreen::OpenScreen(int nWidthIn, int nHeightIn)
 	this->SetHeight(nHeightIn);
 }
 
+// Destructor.
+OpenScreen::~OpenScreen()
+{
+	// As of now there is nothing to do here.
+}
+
 ////////////////////////////////////////////
 //
 // Glut functions
@@ -21,8 +27,10 @@ void OpenScreen::Display()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3d(0,0,0);
-	DrawText(300,390,"Main Screen");
-	DrawText(280,300,"Click to continue");
+	DrawText(10,480,"Main Screen");
+	DrawText(10,460,"Click the following");
+	
+	DrawText(10,440,"b for Bouncing Balls.");
 	glutSwapBuffers();
 }
 
@@ -31,7 +39,20 @@ Screen *OpenScreen::KeyBoard(
     int           nXVal,
     int           nYVal)
 {
-	return NULL;
+	Screen *pScreen=NULL;
+	switch (ucKey) 
+	{
+		case 'b':
+			{
+			// Open Bouncing Balls.
+			int nHeight=this->GetHeight();
+			int nWidth=this->GetWidth();
+			pScreen=new BouncingBallsSetUp(nWidth,nHeight);
+
+			break;
+			}
+	}
+	return pScreen;
 }
 
 void OpenScreen::Reshape(

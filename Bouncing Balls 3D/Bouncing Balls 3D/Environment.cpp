@@ -1,6 +1,7 @@
 #include "Environment.h"
 #include "OpenScreen.h"
 #include "Error.h"
+#include <iostream>
 
 #include "glut.h"
 
@@ -10,6 +11,16 @@ Environment::Environment(int nWidthIn, int nHeightIn)
 {
     // The first initilazation will be of the openscreen.
     pScreen=new OpenScreen(nWidthIn,nHeightIn);
+}
+
+// Destructor.
+Environment::~Environment()
+{
+	if(this->pScreen)
+	{
+		delete pScreen;
+		pScreen=NULL;
+	}
 }
 
 ////////////////////////////////////////////
@@ -37,7 +48,14 @@ void Environment::KeyBoard(
 {
     if(this->pScreen)
     {
-        pScreen->KeyBoard(ucKey,nXVal,nYVal);
+        if(Screen *pNewScreen=pScreen->KeyBoard(ucKey,nXVal,nYVal))
+		{
+			// We are moving from one screen to the next.
+			// Delete the current screen and replace it
+			// with the new screen.
+			delete pScreen;
+			pScreen=pNewScreen;
+		}
     }
     else
     {

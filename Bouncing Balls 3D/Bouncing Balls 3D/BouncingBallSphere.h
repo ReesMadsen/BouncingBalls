@@ -4,8 +4,7 @@
 class BouncingBallSphere
 {
 public:
-	//constructor, deconstructors
-	BouncingBallSphere();
+	// Constructor.
 	BouncingBallSphere(
 		const double x_in,
 		const double y_in,

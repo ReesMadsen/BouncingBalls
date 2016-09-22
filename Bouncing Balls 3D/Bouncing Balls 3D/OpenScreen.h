@@ -6,6 +6,7 @@ class OpenScreen : public Screen
 {
 public:
     OpenScreen(int nWidth, int nHeight);
+	~OpenScreen();
 
     ////////////////////////////////////////////
     //

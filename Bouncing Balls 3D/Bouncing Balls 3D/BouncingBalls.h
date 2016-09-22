@@ -6,7 +6,10 @@
 class BouncingBalls : public Screen
 {
 public:
+	// Constructor.
     BouncingBalls(int nWidth, int nHeight);
+	// Destructor.
+	~BouncingBalls();
 
     ////////////////////////////////////////////
     //
